@@ -1,7 +1,17 @@
 import './index.scss'
 
-const TextArea = () => {
-  return <textarea className="text-area" placeholder="Paste your text here..." />
+interface Props {
+  onChange: (value: string) => void
+}
+
+const TextArea = ({ onChange }: Props) => {
+  return (
+    <textarea
+      className="text-area"
+      placeholder="Paste your text here..."
+      onChange={(e) => onChange(e.target.value)}
+    />
+  )
 }
 
 export default TextArea

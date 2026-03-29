@@ -1,26 +1,38 @@
 import './index.scss'
+import { pronouns } from '../../data/pronouns'
 
-const ResultBox = () => {
+interface Props {
+  text: string
+}
+
+const ResultBox = ({ text }: Props) => {
+
+  const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length
+  const characters = text.length
+  const sentences = text.split(/[.!?]+/).length - 1
+  const paragraphs = text.split(/\n+/).length
+  const pronounses = text.match(new RegExp(`\\b(${pronouns.join('|')})\\b`, 'gi'))?.length || 0
+
   const resultBar = [
     {
       title: 'Words',
-      value: 0,
+      value: words,
     },
     {
       title: 'Characters',
-      value: 0,
+      value: characters,
     },
     {
       title: 'Sentences',
-      value: 0,
+      value: sentences,
     },
     {
       title: 'Paragraphs ',
-      value: 0,
+      value: paragraphs,
     },
     {
       title: 'Pronouns',
-      value: 0,
+      value: pronounses,
     },
   ]
 

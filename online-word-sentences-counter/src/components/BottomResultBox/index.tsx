@@ -1,14 +1,28 @@
 import './index.scss'
 
-const BottomResultBox = () => {
+interface BottomResultBoxProps {
+  text: string
+}
+
+const BottomResultBox = ({ text }: BottomResultBoxProps) => {
+
+  const longestWord = text.trim() === ''
+    ? ''
+    : text.trim().split(/\s+/).reduce((longest, current) => {
+      const word = current.replace(/[^a-zA-Z]/g, '')
+      return word.length > longest.length ? word : longest
+  },'')
+
+  const readingTime = text.trim() === '' ? 0 : Math.ceil(text.trim().split(/\s+/).length / 225)
+
   const bottomResultBar = [
     {
       title: 'Average Reading Time:',
-      value: '-',
+      value: `~${readingTime} minute`,
     },
     {
       title: 'Longest word:',
-      value: '-',
+      value: longestWord,
     },
   ]
 
